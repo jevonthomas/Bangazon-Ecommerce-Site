@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
     date_added: DataTypes.DATE
-  });
+  }, {timestamps: false});
 
-  Products.associate = (models) => {
-  };
+  // Products.associate = (models) => {
+  // };
   
   return Products;
 };
