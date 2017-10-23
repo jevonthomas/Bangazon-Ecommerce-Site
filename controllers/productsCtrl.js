@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports.getProducts = (req, res, next) => {
+module.exports.getHomeProducts = (req, res, next) => {
   const { Products } = req.app.get('models');
   Products.findAll({
     limit: 20,

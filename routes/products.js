@@ -3,8 +3,8 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getProducts } = require('../controllers/productsCtrl');
+const { getHomeProducts } = require('../controllers/productsCtrl');
 
-router.get('/products', getProducts);
+router.get('/home', getHomeProducts);
 
 module.exports = router;
