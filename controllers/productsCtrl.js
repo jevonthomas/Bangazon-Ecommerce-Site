@@ -17,3 +17,14 @@ module.exports.getHomeProducts = (req, res, next) => {
     next(err); 
   });
 };
+
+module.exports.getChosenProduct = (req, res, next) => {
+  const { Products } = req.app.get('models');
+  Products.findOne({raw: true, where:{id:req.params.id} })
+  .then( (product)=>{
+    res.send(JSON.stringify(product));
+  })
+  .catch( (err) => {
+    next(err);
+  });
+};
