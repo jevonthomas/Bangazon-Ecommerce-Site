@@ -14,17 +14,17 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
-      type: {
-        type: Sequelize.STRING
-      },
-      category: {
+      description: {
         type: Sequelize.STRING
       },
       quantity: {
         type: Sequelize.INTEGER
       },
-      date_added: {
+      date_registered: {
         type: Sequelize.DATE
+      },
+      category_id: {
+        type: Sequelize.INTEGER
       }
     });
   },

@@ -5,7 +5,7 @@ module.exports.getHomeProducts = (req, res, next) => {
   Products.findAll({
     limit: 20,
     order: [
-      ['date_added', 'DESC']
+      ['date_registered', 'DESC']
     ]
   })
   .then( (products) => {
@@ -23,6 +23,17 @@ module.exports.getChosenProduct = (req, res, next) => {
   Products.findOne({raw: true, where:{id:req.params.id} })
   .then( (product)=>{
     res.send(JSON.stringify(product));
+  })
+  .catch( (err) => {
+    next(err);
+  });
+};
+
+module.exports.getProductCategories = (req, res, next) => {
+  const { Categories, Products } = req.app.get('models');
+  Categories.findAll({include: [{model: Products, limit: 3, order: [['date_registered', 'DESC']] }]})
+  .then( (categories)=>{
+    res.send(JSON.stringify(categories));
   })
   .catch( (err) => {
     next(err);

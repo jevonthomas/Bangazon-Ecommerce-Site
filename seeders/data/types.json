@@ -1,0 +1,12 @@
+{
+  "types":
+  [
+    {"category_id": 1, "name": "Professional Development"},
+    {"category_id": 1, "name": "Art"},
+    {"category_id": 1, "name": "Novel"},
+    {"category_id": 1, "name": "Religious"},
+    {"category_id": 2, "name": "Health"},
+    {"category_id": 2, "name": "Fitness"},
+    {"category_id": 2, "name": "Graphic Novels"}
+  ]
+}
