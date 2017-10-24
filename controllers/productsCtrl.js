@@ -9,9 +9,7 @@ module.exports.getHomeProducts = (req, res, next) => {
     ]
   })
   .then( (products) => {
-    // console.log("Product", products.dataValues);
     res.send(JSON.stringify(products));
-    // res.render('product', {data: products});
   })
   .catch( (err) => {
     next(err); 
@@ -20,7 +18,10 @@ module.exports.getHomeProducts = (req, res, next) => {
 
 module.exports.getChosenProduct = (req, res, next) => {
   const { Products } = req.app.get('models');
-  Products.findOne({raw: true, where:{id:req.params.id} })
+  Products.findOne({
+    raw: true, 
+    where:{id:req.params.id} 
+  })
   .then( (product)=>{
     res.send(JSON.stringify(product));
   })
@@ -31,11 +32,33 @@ module.exports.getChosenProduct = (req, res, next) => {
 
 module.exports.getProductCategories = (req, res, next) => {
   const { Categories, Products } = req.app.get('models');
-  Categories.findAll({include: [{model: Products, limit: 3, order: [['date_registered', 'DESC']] }]})
+  Categories.findAll({
+    include: [{model: Products, limit: 3, order: [['date_registered', 'DESC']] }]
+  })
   .then( (categories)=>{
     res.send(JSON.stringify(categories));
   })
   .catch( (err) => {
     next(err);
   });
-};
+}
+;
+module.exports.getProductCategory = (req, res, next) => {
+  const { Categories, Products } = req.app.get('models');
+  Categories.findOne({
+    raw: true, 
+    where:{id:req.params.id}
+  })
+  .then( (categories)=>{
+    Products.findAll({
+      raw: true, 
+      where:{category_id:req.params.id}
+    })
+    .then( (products) => {
+      res.send(JSON.stringify({categories, products}));
+    })
+  .catch( (err) => {
+    next(err);
+  });
+}
+  )}
