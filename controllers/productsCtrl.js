@@ -41,8 +41,8 @@ module.exports.getProductCategories = (req, res, next) => {
   .catch( (err) => {
     next(err);
   });
-}
-;
+};
+
 module.exports.getProductCategory = (req, res, next) => {
   const { Categories, Products } = req.app.get('models');
   Categories.findOne({
@@ -61,4 +61,18 @@ module.exports.getProductCategory = (req, res, next) => {
     next(err);
   });
 }
-  )}
+)}
+
+module.exports.getSearchedProduct= (req, res, next) => {
+  const { Products } = req.app.get('models');
+  Products.findAll({
+    raw: true,
+    where:{title:req.query.q}
+  })
+  .then( (products)=>{
+    res.send(JSON.stringify(products));
+  })
+  .catch( (err) => {
+    next(err);
+  });
+}
