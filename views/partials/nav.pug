@@ -2,6 +2,6 @@ if session.passport
   span #{session.passport.user.username}
   form(method="POST")
     button(type="submit" formaction="/logout") logout
-  form(method="GET"  action="/search" onsubmit="return q.value!=''")
-    input(type="text")
+  form(method="POST"  action="/search")
+    input(type="text" name="search")
     button(type="submit" value="Search") Search

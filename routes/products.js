@@ -9,6 +9,6 @@ router.get('/home', getHomeProducts);
 router.get('/products/:id', getChosenProduct);
 router.get('/categories', getProductCategories);
 router.get('/categories/:id', getProductCategory);
-router.get('/search', getSearchedProduct);
+router.post('/search', getSearchedProduct);
 
 module.exports = router;

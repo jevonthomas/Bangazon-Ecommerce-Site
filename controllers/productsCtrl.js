@@ -64,10 +64,13 @@ module.exports.getProductCategory = (req, res, next) => {
 )}
 
 module.exports.getSearchedProduct= (req, res, next) => {
+// Storing the search input into a variable in order to capitalize the first letter
+  let search = req.body.search;
+  search = search.charAt(0).toUpperCase() + search.slice(1);
   const { Products } = req.app.get('models');
   Products.findAll({
     raw: true,
-    where:{title:req.query.q}
+    where:{title:search}
   })
   .then( (products)=>{
     res.send(JSON.stringify(products));
