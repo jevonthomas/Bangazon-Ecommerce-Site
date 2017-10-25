@@ -5,3 +5,4 @@ if session.passport
   form(method="POST"  action="/search")
     input(type="text" name="search")
     button(type="submit" value="Search") Search
+  a(href="/account/"+session.passport.user.id) Account
