@@ -41,8 +41,8 @@ module.exports.getProductCategories = (req, res, next) => {
   .catch( (err) => {
     next(err);
   });
-}
-;
+};
+
 module.exports.getProductCategory = (req, res, next) => {
   const { Categories, Products } = req.app.get('models');
   Categories.findOne({
@@ -61,4 +61,21 @@ module.exports.getProductCategory = (req, res, next) => {
     next(err);
   });
 }
-  )}
+)}
+
+module.exports.getSearchedProduct= (req, res, next) => {
+// Storing the search input into a variable in order to capitalize the first letter
+  let search = req.body.search;
+  search = search.charAt(0).toUpperCase() + search.slice(1);
+  const { Products } = req.app.get('models');
+  Products.findAll({
+    raw: true,
+    where:{title:search}
+  })
+  .then( (products)=>{
+    res.send(JSON.stringify(products));
+  })
+  .catch( (err) => {
+    next(err);
+  });
+}
